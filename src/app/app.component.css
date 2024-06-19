@@ -1,0 +1,18 @@
+.container {
+  height: 100%;
+  background: #f0f0f0;
+}
+
+mat-drawer {
+  width: 250px;
+  background-color: #f0f0f0;
+  padding: 1rem;
+}
+
+mat-drawer-content {
+  background-color: white;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

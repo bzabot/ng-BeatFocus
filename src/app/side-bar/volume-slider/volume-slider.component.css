@@ -1,0 +1,19 @@
+.volume {
+  margin-bottom: 0.5rem;
+}
+
+.my-slider {
+  --mdc-slider-handle-color: #e52020;
+  --mdc-slider-active-track-color: #e52020;
+  --mdc-slider-inactive-track-color: #e52020;
+  --mdc-slider-label-container-color: #e52020;
+  --mdc-slider-focus-handle-color: #e52020;
+  --mdc-slider-hover-handle-color: #e52020;
+  --mat-slider-hover-state-layer-color: rgba(229, 32, 32, 0.05);
+  --mat-slider-focus-state-layer-color: rgba(229, 32, 32, 0.2);
+
+  /* --mdc-slider-handle-height: 25px;
+  --mdc-slider-handle-width: 40px; */
+
+  --mdc-slider-inactive-track-shape: 20px;
+}

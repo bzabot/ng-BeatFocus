@@ -1,0 +1,16 @@
+<button
+  (click)="clickBtn()"
+  [ngClass]="status ? 'active' : ''"
+  class="btn btn-play-pause play-pause"
+>
+  <div class="icon-container">
+    <svg class="icon play">
+      <use xlink:href="#play"></use>
+    </svg>
+  </div>
+  <div class="icon-container">
+    <svg class="icon pause">
+      <use xlink:href="#pause"></use>
+    </svg>
+  </div>
+</button>
