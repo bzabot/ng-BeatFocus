@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-play-button',
@@ -10,7 +10,11 @@ import { Component } from '@angular/core';
 })
 export class PlayButtonComponent {
   status = false;
+
+  @Output() onButtonClick: EventEmitter<void> = new EventEmitter();
+
   clickBtn() {
     this.status = !this.status;
+    this.onButtonClick.emit();
   }
 }

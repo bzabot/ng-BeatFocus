@@ -1,4 +1,4 @@
 <div class="cronometer">
-  <h1 class="timer-txt">25:00</h1>
-  <app-play-button />
+  <h1 class="timer-txt">{{ totalSeconds | timeFormatter }}</h1>
+  <app-play-button (onButtonClick)="startCronometer()" />
 </div>
