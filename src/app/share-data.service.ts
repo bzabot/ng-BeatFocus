@@ -6,15 +6,22 @@ import { TimerData } from './timer-data.interface';
   providedIn: 'root',
 })
 export class ShareDataService {
-  private dataSource = new BehaviorSubject<TimerData>({
+  private timeDataSource = new BehaviorSubject<TimerData>({
     focusTime: 25,
     breakTime: 5,
   });
-  currentData = this.dataSource.asObservable();
+  currentTimeData = this.timeDataSource.asObservable();
+
+  private volumeData = new BehaviorSubject<number>(50);
+  currentVolume = this.volumeData.asObservable();
 
   constructor() {}
 
-  changeData(data: TimerData) {
-    this.dataSource.next(data);
+  changeTimerData(data: TimerData) {
+    this.timeDataSource.next(data);
+  }
+
+  changeVolume(volume: number) {
+    this.volumeData.next(volume);
   }
 }

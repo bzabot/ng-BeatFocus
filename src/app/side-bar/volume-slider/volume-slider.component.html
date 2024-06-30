@@ -1,5 +1,13 @@
 <h1 class="volume">Volume</h1>
 
-<mat-slider class="my-slider" [discrete]="true">
-  <input matSliderThumb #slider />
+<mat-slider
+  class="my-slider"
+  (input)="onChangeSlider($event)"
+  thumbLabel
+  tickInterval="1"
+  min="0"
+  max="100"
+  [discrete]="true"
+>
+  <input matSliderThumb #slider [value]="volume" />
 </mat-slider>

@@ -14,6 +14,6 @@ export class SetTimersComponent {
   constructor(private sharedService: ShareDataService) {}
 
   onSubmit(form: TimerData) {
-    this.sharedService.changeData(form);
+    this.sharedService.changeTimerData(form);
   }
 }
