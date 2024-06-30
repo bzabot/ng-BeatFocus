@@ -14,22 +14,18 @@
   box-shadow: inset 0.2rem 0.2rem 0.5rem #9baacf,
     inset -0.2rem -0.2rem 0.5rem white;
   color: black;
-
   padding-left: 1rem;
+  margin-right: 10px; /* Applies margin-right to all .controls-input elements except the last one */
 
-  .controls-input:not(:last-child) {
-    margin-right: 10px;
-  }
-  .controls-input::-webkit-outer-spin-button,
-  .controls-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+  /* Remove spin buttons */
+  -webkit-appearance: none;
   -moz-appearance: textfield;
 }
 
-.controls-input:not(:last-child) {
-  margin-right: 10px;
+.controls-input::-webkit-outer-spin-button,
+.controls-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .btn-set-time {
@@ -47,6 +43,7 @@
   box-shadow: 0.3rem 0.3rem 0.6rem #9baacf;
   font-size: 1.6rem;
   font-weight: 550;
+  border: none; /* Ensure no border on the button */
 }
 
 .btn-set-time:active {

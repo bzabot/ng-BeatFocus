@@ -1,20 +1,25 @@
-<div class="inputs">
-  <input
-    type="number"
-    class="controls-input"
-    id="focusTime"
-    min="0"
-    max="60"
-    placeholder="Focus Time"
-  />
-  <input
-    type="number"
-    class="controls-input"
-    id="pauseTime"
-    min="0"
-    max="60"
-    placeholder="Pause Time"
-  />
-</div>
-
-<div class="btn btn-set-time"><p>Set time</p></div>
+<form (ngSubmit)="onSubmit(myForm.value)" #myForm="ngForm">
+  <div class="inputs">
+    <input
+      type="number"
+      class="controls-input"
+      id="focusTime"
+      name="focusTime"
+      ngModel
+      min="0"
+      max="60"
+      placeholder="Focus Time"
+    />
+    <input
+      type="number"
+      class="controls-input"
+      id="breakTime"
+      name="breakTime"
+      ngModel
+      min="0"
+      max="60"
+      placeholder="Pause Time"
+    />
+  </div>
+  <button type="submit" class="btn-set-time">Set time</button>
+</form>
