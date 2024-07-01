@@ -14,8 +14,8 @@ import { CronometerService } from './cronometer.service';
 })
 export class CronometerComponent implements OnInit {
   totalSeconds: number = 0;
-  focusTime: number = 25 * 60;
-  breakTime: number = 25 * 60;
+  focusTime: number = 25;
+  breakTime: number = 25;
 
   data: TimerData = { focusTime: 25, breakTime: 5 };
 
@@ -35,7 +35,7 @@ export class CronometerComponent implements OnInit {
     });
 
     this.sharedService.currentVolume.subscribe((volume: number) => {
-      // Handle volume changes
+      this.cronometerService.setVolume(volume);
     });
   }
 
@@ -46,9 +46,7 @@ export class CronometerComponent implements OnInit {
 
 // Next features:
 /*
-- time setter
-- play music
 - choose music
-- change volume
+- total time studied
 - local storage
 */

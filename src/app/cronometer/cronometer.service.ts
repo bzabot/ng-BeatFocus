@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TimerData } from '../timer-data.interface';
+import { AudioService } from './audio.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,8 @@ export class CronometerService {
   private isPaused = true;
   private focusTime: number = 15 * 60;
   private breakTime: number = 5 * 60;
+
+  constructor(private audioService: AudioService) {}
 
   setTime(data: TimerData) {
     if (data.focusTime > 0) {
@@ -29,12 +32,13 @@ export class CronometerService {
   }
 
   toggleCronometer() {
-    if (this.isPaused) {
+    this.isPaused = !this.isPaused;
+    if (!this.isPaused) {
+      this.handleAudioPlayback();
       this.startCronometer();
     } else {
       this.stopCronometer();
     }
-    this.isPaused = !this.isPaused;
   }
 
   private switchModes() {
@@ -43,6 +47,8 @@ export class CronometerService {
     this.totalSecondsSubject.next(
       this.isWorkTime ? this.focusTime : this.breakTime
     );
+    this.handleAudioPlayback();
+    console.log('start');
     this.startCronometer();
   }
 
@@ -63,6 +69,22 @@ export class CronometerService {
     if (this.interval) {
       clearInterval(this.interval);
       this.interval = null;
+    }
+    this.audioService.stopAudio();
+  }
+
+  setVolume(volume: number) {
+    this.audioService.setVolume(volume / 100);
+  }
+
+  private handleAudioPlayback() {
+    console.log(this.isWorkTime);
+    console.log(this.isPaused);
+    if (this.isWorkTime && !this.isPaused) {
+      this.audioService.playAudio('binaural.mp3'); // still need to change this
+      console.log('play audio');
+    } else {
+      this.audioService.stopAudio();
     }
   }
 }
