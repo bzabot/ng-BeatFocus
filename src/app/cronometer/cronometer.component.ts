@@ -50,7 +50,7 @@ export class CronometerComponent implements OnInit {
 
 // Next features:
 /*
-- choose music
+- alarm
 - total time studied
 - local storage
 */

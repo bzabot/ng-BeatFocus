@@ -15,7 +15,7 @@ export class CronometerService {
   private isPaused = true;
   private focusTime: number = 15 * 60;
   private breakTime: number = 5 * 60;
-  private focusSound: string = 'Binaural.mp3';
+  private audioType: string = 'binaural';
 
   constructor(private audioService: AudioService) {}
 
@@ -80,13 +80,15 @@ export class CronometerService {
 
   private handleAudioPlayback() {
     if (this.isWorkTime && !this.isPaused) {
-      this.audioService.playAudio(this.focusSound);
+      // console.log(this.audioType);
+      this.audioService.playAudio(this.audioType);
     } else {
       this.audioService.stopAudio();
     }
   }
 
   setSound(sound: string) {
-    this.focusSound = sound + '.mp3';
+    // this.audioService.changeAudio(sound);
+    this.audioType = sound;
   }
 }
