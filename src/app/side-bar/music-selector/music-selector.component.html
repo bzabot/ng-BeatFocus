@@ -1,5 +1,5 @@
 <div class="select-box">
-  <select class="selector" id="soundType">
+  <select class="selector" #soundType (change)="changeSound(soundType.value)">
     <option value="Binaural">Binaural</option>
     <option value="Classical">Classical</option>
     <option value="Lofi">Lofi</option>

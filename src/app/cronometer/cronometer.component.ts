@@ -14,10 +14,10 @@ import { CronometerService } from './cronometer.service';
 })
 export class CronometerComponent implements OnInit {
   totalSeconds: number = 0;
-  focusTime: number = 25;
-  breakTime: number = 25;
+  // focusTime: number = 25;
+  // breakTime: number = 25;
 
-  data: TimerData = { focusTime: 25, breakTime: 5 };
+  // data: TimerData = { focusTime: 25, breakTime: 5 };
 
   constructor(
     private sharedService: ShareDataService,
@@ -26,16 +26,20 @@ export class CronometerComponent implements OnInit {
   ngOnInit() {
     // Handle set timer submit
     this.sharedService.currentTimeData.subscribe((data: TimerData) => {
-      this.data = data;
+      // this.data = data;
       this.cronometerService.setTime(data);
-    });
-
-    this.cronometerService.totalSeconds$.subscribe((seconds) => {
-      this.totalSeconds = seconds;
     });
 
     this.sharedService.currentVolume.subscribe((volume: number) => {
       this.cronometerService.setVolume(volume);
+    });
+
+    this.sharedService.currentSound.subscribe((sound: string) => {
+      this.cronometerService.setSound(sound);
+    });
+
+    this.cronometerService.totalSeconds$.subscribe((seconds) => {
+      this.totalSeconds = seconds;
     });
   }
 
