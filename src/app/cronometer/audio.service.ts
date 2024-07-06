@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AudioService {
   private audio = new Audio();
-
+  private alarm = new Audio('alarm.wav');
   audioType: string = 'binaural';
   private audioFolder: string | null = '';
   private audioFiles: string[] | null = [''];
@@ -77,6 +77,7 @@ export class AudioService {
 
   constructor() {
     this.audio.onended = () => this.onAudioEnded();
+    this.alarm.volume = 0.15;
   }
   changeAudio(audioType: string) {
     this.audioType = audioType;
@@ -123,5 +124,9 @@ export class AudioService {
 
   setVolume(volume: number) {
     this.audio.volume = volume;
+  }
+
+  playAlarm() {
+    this.alarm.play();
   }
 }

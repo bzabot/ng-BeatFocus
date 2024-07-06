@@ -21,10 +21,10 @@ export class CronometerService {
 
   setTime(data: TimerData) {
     if (data.focusTime > 0) {
-      this.focusTime = data.focusTime * 60;
+      this.focusTime = data.focusTime;
     }
     if (data.breakTime > 0) {
-      this.breakTime = data.breakTime * 60;
+      this.breakTime = data.breakTime;
     }
 
     this.totalSecondsSubject.next(
@@ -44,12 +44,13 @@ export class CronometerService {
 
   private switchModes() {
     this.isWorkTime = !this.isWorkTime;
+    this.audioService.playAlarm();
     this.stopCronometer();
     this.totalSecondsSubject.next(
       this.isWorkTime ? this.focusTime : this.breakTime
     );
-    this.handleAudioPlayback();
 
+    this.handleAudioPlayback();
     this.startCronometer();
   }
 
