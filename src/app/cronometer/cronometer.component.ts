@@ -56,6 +56,5 @@ export class CronometerComponent implements OnInit {
 
 // Next features:
 /*
-- total time studied
 - local storage
 */

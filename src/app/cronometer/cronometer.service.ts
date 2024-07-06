@@ -2,16 +2,26 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TimerData } from '../timer-data.interface';
 import { AudioService } from './audio.service';
+import { LocalStorageService } from '../local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CronometerService {
+  constructor(
+    private audioService: AudioService,
+    private localStorageService: LocalStorageService
+  ) {}
+
   private interval: ReturnType<typeof setInterval> | null = null;
   private totalSecondsSubject = new BehaviorSubject<number>(0);
   totalSeconds$: Observable<number> = this.totalSecondsSubject.asObservable();
+  private today: string = new Date().toISOString().slice(0, 10);
+  private totalTimeStudiedInit = this.localStorageService.getItem(this.today);
 
-  private totalTimeStudiedSubject = new BehaviorSubject<number>(0);
+  private totalTimeStudiedSubject = new BehaviorSubject<number>(
+    this.totalTimeStudiedInit
+  );
   totalTimeStudied$: Observable<number> =
     this.totalTimeStudiedSubject.asObservable();
 
@@ -20,8 +30,6 @@ export class CronometerService {
   private focusTime: number = 15 * 60;
   private breakTime: number = 5 * 60;
   private audioType: string = 'binaural';
-
-  constructor(private audioService: AudioService) {}
 
   setTime(data: TimerData) {
     if (data.focusTime > 0) {
@@ -63,9 +71,12 @@ export class CronometerService {
       let currentSeconds = this.totalSecondsSubject.getValue();
       currentSeconds--;
 
-      let currentTotalTimeStudied = this.totalTimeStudiedSubject.getValue();
-      currentTotalTimeStudied++;
-      this.totalTimeStudiedSubject.next(currentTotalTimeStudied);
+      if (this.isWorkTime) {
+        let currentTotalTimeStudied = this.totalTimeStudiedSubject.getValue();
+        currentTotalTimeStudied++;
+        this.totalTimeStudiedSubject.next(currentTotalTimeStudied);
+        this.saveTotalTimeStudied(currentTotalTimeStudied);
+      }
 
       if (currentSeconds < 0) {
         this.switchModes();
@@ -97,5 +108,9 @@ export class CronometerService {
 
   setSound(sound: string) {
     this.audioType = sound;
+  }
+
+  private saveTotalTimeStudied(totalTimeStudied: number) {
+    this.localStorageService.setItem(this.today, totalTimeStudied.toString());
   }
 }
