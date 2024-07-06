@@ -15,8 +15,11 @@ export class ShareDataService {
   private volumeData = new BehaviorSubject<number>(50);
   currentVolume = this.volumeData.asObservable();
 
-  private soundData = new BehaviorSubject<string>('Binaural');
+  private soundData = new BehaviorSubject<string>('binaural');
   currentSound = this.soundData.asObservable();
+
+  private timeStudiedData = new BehaviorSubject<number>(0);
+  currentTimeStudied = this.timeStudiedData.asObservable();
 
   constructor() {}
 
@@ -30,5 +33,9 @@ export class ShareDataService {
 
   changeSound(sound: string) {
     this.soundData.next(sound);
+  }
+
+  changeTimeStudied(data: number) {
+    this.timeStudiedData.next(data);
   }
 }

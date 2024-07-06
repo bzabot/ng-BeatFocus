@@ -11,6 +11,10 @@ export class CronometerService {
   private totalSecondsSubject = new BehaviorSubject<number>(0);
   totalSeconds$: Observable<number> = this.totalSecondsSubject.asObservable();
 
+  private totalTimeStudiedSubject = new BehaviorSubject<number>(0);
+  totalTimeStudied$: Observable<number> =
+    this.totalTimeStudiedSubject.asObservable();
+
   private isWorkTime = true;
   private isPaused = true;
   private focusTime: number = 15 * 60;
@@ -21,10 +25,10 @@ export class CronometerService {
 
   setTime(data: TimerData) {
     if (data.focusTime > 0) {
-      this.focusTime = data.focusTime;
+      this.focusTime = data.focusTime * 60;
     }
     if (data.breakTime > 0) {
-      this.breakTime = data.breakTime;
+      this.breakTime = data.breakTime * 60;
     }
 
     this.totalSecondsSubject.next(
@@ -59,6 +63,10 @@ export class CronometerService {
       let currentSeconds = this.totalSecondsSubject.getValue();
       currentSeconds--;
 
+      let currentTotalTimeStudied = this.totalTimeStudiedSubject.getValue();
+      currentTotalTimeStudied++;
+      this.totalTimeStudiedSubject.next(currentTotalTimeStudied);
+
       if (currentSeconds < 0) {
         this.switchModes();
       } else {
@@ -81,7 +89,6 @@ export class CronometerService {
 
   private handleAudioPlayback() {
     if (this.isWorkTime && !this.isPaused) {
-      // console.log(this.audioType);
       this.audioService.playAudio(this.audioType);
     } else {
       this.audioService.stopAudio();
@@ -89,7 +96,6 @@ export class CronometerService {
   }
 
   setSound(sound: string) {
-    // this.audioService.changeAudio(sound);
     this.audioType = sound;
   }
 }

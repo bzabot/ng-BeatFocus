@@ -41,6 +41,12 @@ export class CronometerComponent implements OnInit {
     this.cronometerService.totalSeconds$.subscribe((seconds) => {
       this.totalSeconds = seconds;
     });
+
+    this.cronometerService.totalTimeStudied$.subscribe(
+      (timeStudied: number) => {
+        this.sharedService.changeTimeStudied(timeStudied);
+      }
+    );
   }
 
   toggleCronometer() {
@@ -50,7 +56,6 @@ export class CronometerComponent implements OnInit {
 
 // Next features:
 /*
-- alarm
 - total time studied
 - local storage
 */
