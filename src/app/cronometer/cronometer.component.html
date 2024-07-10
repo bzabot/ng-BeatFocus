@@ -1,4 +1,15 @@
-<div class="cronometer">
-  <h1 class="timer-txt">{{ totalSeconds | timeFormatter }}</h1>
-  <app-play-button (onButtonClick)="toggleCronometer()" />
+<!-- app.component.html -->
+<div class="spinner-wrapper">
+  <mat-progress-spinner
+    class="spinner"
+    [mode]="determinate"
+    [value]="progress"
+    [diameter]="310"
+    [strokeWidth]="4"
+  >
+  </mat-progress-spinner>
+  <div class="cronometer">
+    <h1 class="timer-txt">{{ totalSeconds | timeFormatter }}</h1>
+    <app-play-button (onButtonClick)="toggleCronometer()"></app-play-button>
+  </div>
 </div>

@@ -4,16 +4,22 @@ import { TimeFormatterPipe } from './time-formatter.pipe';
 import { ShareDataService } from '../share-data.service';
 import { TimerData } from '../timer-data.interface';
 import { CronometerService } from './cronometer.service';
+import {
+  MatProgressSpinnerModule,
+  ProgressSpinnerMode,
+} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cronometer',
   standalone: true,
   templateUrl: './cronometer.component.html',
   styleUrl: './cronometer.component.css',
-  imports: [PlayButtonComponent, TimeFormatterPipe],
+  imports: [PlayButtonComponent, TimeFormatterPipe, MatProgressSpinnerModule],
 })
 export class CronometerComponent implements OnInit {
   totalSeconds: number = 0;
+  determinate: ProgressSpinnerMode = 'determinate';
+  progress: number = 0;
   // focusTime: number = 25;
   // breakTime: number = 25;
 
@@ -47,6 +53,12 @@ export class CronometerComponent implements OnInit {
         this.sharedService.changeTimeStudied(timeStudied);
       }
     );
+
+    this.cronometerService.progress$.subscribe(progress => {
+      this.progress = progress;
+    })
+
+
   }
 
   toggleCronometer() {

@@ -27,9 +27,11 @@ export class CronometerService {
 
   private isWorkTime = true;
   private isPaused = true;
-  private focusTime: number = 15 * 60;
+  private focusTime: number = 25 * 60;
   private breakTime: number = 5 * 60;
   private audioType: string = 'binaural';
+  private progressSubject = new BehaviorSubject<number>(0);
+  progress$: Observable<number> = this.progressSubject.asObservable();
 
   setTime(data: TimerData) {
     if (data.focusTime > 0) {
@@ -66,10 +68,19 @@ export class CronometerService {
     this.startCronometer();
   }
 
+  private getProgress(currentSeconds: number) {
+    const progress =
+      ((this.isWorkTime ? this.focusTime : this.breakTime) - currentSeconds) /
+      (this.isWorkTime ? this.focusTime : this.breakTime);
+    this.progressSubject.next(progress * 100);
+  }
+
   private startCronometer() {
     this.interval = setInterval(() => {
       let currentSeconds = this.totalSecondsSubject.getValue();
       currentSeconds--;
+
+      this.getProgress(currentSeconds);
 
       if (this.isWorkTime) {
         let currentTotalTimeStudied = this.totalTimeStudiedSubject.getValue();
