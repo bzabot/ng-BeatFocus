@@ -1,0 +1,65 @@
+.inputs{
+  display: flex;
+  align-items: center;
+  width: 100%;  
+  justify-content: space-between;
+}
+
+.controls-input{
+  width: 100%;
+  margin-right: 10px;
+  width: 100%;
+  background: none;
+  height: 4rem;
+  border: none;
+  font-size: 1.3rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #9baacf,
+    inset -0.2rem -0.2rem 0.5rem white;
+  color: black;
+  padding-left: 1rem;
+  margin-right: 10px; /* Applies margin-right to all .controls-input elements except the last one */
+
+  /* Remove spin buttons */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+
+.btn{
+  width: 20%;
+ 
+  margin: 0;
+}
+
+.btn-search{
+  color: black;
+  font-weight: 600;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  border-radius: 10%;
+  padding: 5px;
+  background: #e52020;
+  transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.btn-search:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+.btn-search:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+}
+

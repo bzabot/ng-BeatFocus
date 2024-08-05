@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit(myForm.value)" #myForm="ngForm">
+    <div class="inputs">
+      <input
+        type="string"
+        class="controls-input"
+        id="playlist"
+        name="sfPlaylist"
+        ngModel
+        min="0"
+        max="60"
+        placeholder="Playlist Link"
+      />
+      <button class="btn btn-search">
+        Set
+        </button>
+    </div>
+    
+</form>
